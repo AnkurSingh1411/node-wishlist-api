@@ -19,10 +19,21 @@ app.post('/product', (req, res) => {
     product.save((err, savedProduct) => {
         if (err) {
             res.status(500).send({error: 'Error: could not save product to database.'})
-        }else{
+        } else {
             res.status(200).send(savedProduct);
         }
     })
+});
+
+app.get('/product', (req, res) => {
+
+    Product.find({}, (err, products) => {
+        if (err) {
+            res.status(500).send({error: 'Error: could not retrieve products from database.'})
+        } else {
+            res.status(200).send(products);
+        }
+    });
 });
 
 app.listen(port, () => {
